@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function Name() {
+    const [name, setName] = React.useState('')
+
+    return (
+        <div>
+            <label htmlFor="name">Name: </label>
+            <input id="name" value={name} onChange={event => setName(event.target.value)}/>
+        </div>
+    )
 }
 
-export default App;
+function FavoriteAnimal({animal, onAnimalChange}) {
+    return (
+        <div>
+            <label htmlFor="animal">Favorite Animal: </label>
+            <input
+                id="animal"
+                value={animal}
+                onChange={onAnimalChange}
+            />
+        </div>
+    )
+}
+
+function Display({animal}) {
+    return <div>{`Ваше любимое животное: ${animal}!`}</div>
+}
+
+function App() {
+    const [animal, setAnimal] = React.useState('')
+
+    return (
+        <form>
+            <Name/>
+            <FavoriteAnimal animal={animal} onAnimalChange={event => setAnimal(event.target.value)}/>
+            <Display animal={animal}/>
+
+        </form>
+
+    )
+}
+
+export default App
